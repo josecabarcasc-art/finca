@@ -87,10 +87,10 @@ public class Local extends Inmueble {
     }
 
     public String getInquilinoId() {
-        return inquilinoActual;
+        return inquilinoId;
     }
 
-    public void setInquilinoId(String inquilinoActual) {
+    public void setInquilinoId(String inquilinoId) {
         this.inquilinoId = inquilinoId;
     }
 
