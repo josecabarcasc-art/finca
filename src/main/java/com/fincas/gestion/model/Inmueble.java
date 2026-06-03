@@ -1,8 +1,13 @@
 package com.fincas.gestion.model;
 
+import jakarta.persistence.*;
 
+
+@Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Inmueble {
 
+    @Id
     private String id;
     private String direccion;
     private String numero;

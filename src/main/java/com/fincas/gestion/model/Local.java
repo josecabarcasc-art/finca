@@ -1,8 +1,11 @@
 package com.fincas.gestion.model;
 
+import jakarta.persistence.*;
+
 
 import java.time.LocalDate;
 
+@Entity
 public class Local extends Inmueble {
 
     public enum UsoLocal { COMERCIAL, OFICINA, ALMACEN, HOSTELERIA, OTRO }
@@ -11,7 +14,7 @@ public class Local extends Inmueble {
     private int numeroLocal;
     private UsoLocal usoLocal;
     private boolean gestionadoPorEmpresa;
-    private Inquilino inquilinoActual;
+    private String inquilinoId;
     private LocalDate fechaInicioContrato;
     private LocalDate fechaFinContrato;
     private double rentaMensual;
@@ -26,7 +29,7 @@ public class Local extends Inmueble {
         this.numeroLocal = numeroLocal;
         this.usoLocal = usoLocal;
         this.gestionadoPorEmpresa = gestionadoPorEmpresa;
-        this.inquilinoActual = null;
+        this.inquilinoId = null;
         this.rentaMensual = rentaMensual;
         this.tieneIVA = tieneIVA;
     }
@@ -37,7 +40,7 @@ public class Local extends Inmueble {
     }
 
     public boolean isAlquilado() {
-        return inquilinoActual != null;
+        return inquilinoId != null && !inquilinoId.isEmpty();
     }
 
     public double getRentaConIVA() {
@@ -46,7 +49,7 @@ public class Local extends Inmueble {
 
     @Override
     public String toString() {
-        String estado = isAlquilado() ? "ALQUILADO a " + inquilinoActual.getNombreCompleto() : "LIBRE";
+        String estado = isAlquilado() ? "ALQUILADO a " + inquilinoId : "LIBRE";
         return super.toString() + " | Local " + numeroLocal + " (" + usoLocal + ") | " + estado
                 + " | Renta: " + rentaMensual + "€" + (tieneIVA ? " (+IVA)" : "");
     }
@@ -83,12 +86,12 @@ public class Local extends Inmueble {
         this.gestionadoPorEmpresa = gestionadoPorEmpresa;
     }
 
-    public Inquilino getInquilinoActual() {
+    public String getInquilinoId() {
         return inquilinoActual;
     }
 
-    public void setInquilinoActual(Inquilino inquilinoActual) {
-        this.inquilinoActual = inquilinoActual;
+    public void setInquilinoId(String inquilinoActual) {
+        this.inquilinoId = inquilinoId;
     }
 
     public LocalDate getFechaInicioContrato() {

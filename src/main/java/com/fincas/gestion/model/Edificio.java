@@ -1,9 +1,12 @@
 package com.fincas.gestion.model;
 
+import jakarta.persistence.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Edificio extends Inmueble {
 
     private String nombreEdificio;

@@ -1,8 +1,11 @@
 package com.fincas.gestion.model;
 
+import jakarta.persistence.*;
+
 
 import java.time.LocalDate;
 
+@Entity
 public class Piso extends Inmueble {
 
     private String edificioId;
@@ -11,7 +14,7 @@ public class Piso extends Inmueble {
     private int habitaciones;
     private int banos;
     private boolean gestionadoPorEmpresa;
-    private Inquilino inquilinoActual;
+    private String inquilinoId;
     private LocalDate fechaInicioContrato;
     private LocalDate fechaFinContrato;
     private double rentaMensual;
@@ -27,7 +30,7 @@ public class Piso extends Inmueble {
         this.habitaciones = habitaciones;
         this.banos = banos;
         this.gestionadoPorEmpresa = gestionadoPorEmpresa;
-        this.inquilinoActual = null;
+        this.inquilinoId = null;
         this.rentaMensual = rentaMensual;
     }
 
@@ -37,7 +40,7 @@ public class Piso extends Inmueble {
     }
 
     public boolean isAlquilado() {
-        return inquilinoActual != null;
+        return inquilinoId != null && !inquilinoId.isEmpty();
     }
 
     public String getIdentificacion() {
@@ -46,7 +49,7 @@ public class Piso extends Inmueble {
 
     @Override
     public String toString() {
-        String estado = isAlquilado() ? "ALQUILADO a " + inquilinoActual.getNombreCompleto() : "LIBRE";
+        String estado = isAlquilado() ? "ALQUILADO a " + inquilinoId : "LIBRE";
         return super.toString() + " | " + getIdentificacion() + " | " + estado + " | Renta: " + rentaMensual + "€";
     }
 
@@ -98,12 +101,12 @@ public class Piso extends Inmueble {
         this.gestionadoPorEmpresa = gestionadoPorEmpresa;
     }
 
-    public Inquilino getInquilinoActual() {
+    public String getInquilinoId() {
         return inquilinoActual;
     }
 
-    public void setInquilinoActual(Inquilino inquilinoActual) {
-        this.inquilinoActual = inquilinoActual;
+    public void setInquilinoId(String inquilinoActual) {
+        this.inquilinoId = inquilinoId;
     }
 
     public LocalDate getFechaInicioContrato() {
